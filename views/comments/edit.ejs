@@ -1,0 +1,28 @@
+<%- layout('./templates/boilerplate') -%>
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1 class="mb-4">Commenting on:</h1>
+        <article class="mb-4 card">
+            <h5 class="card-header">
+                <div class="d-flex justify-content-between">
+                <span class="my-auto"><%= post.user.username %></span>
+                </div>
+            </h5> 
+            <div class="card-body">
+                <p class="card-text"><%= post.body %></p>
+            </div>
+            <div class="card-footer text-muted">
+                <%= post.date %>
+            </div>
+        </article>
+
+        <h1>Edit Comment</h1>
+        <form action="/posts/show/<%= post._id %>/<%= comment._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+            <textarea class="mt-4 form-control" name="body" required><%= comment.body %></textarea>
+            <div class="invalid-feedback">You can't leave a blank comment!</div>
+        <button class="my-4 btn btn-primary">Submit</button>
+        </form>
+
+        <a href="/posts/show/<%= post._id %>">Back</a>
+    </div>
+</div>

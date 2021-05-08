@@ -1,0 +1,15 @@
+<%- layout('./templates/boilerplate') -%>
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1>Edit Post</h1>
+        <form action="/posts/show/<%= post._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+            <textarea class="mt-4 form-control" name="body" required><%= post.body %></textarea>
+            <div class="invalid-feedback">
+                You can't leave a post blank!
+            </div>
+        <button class="my-4 btn btn-primary">Submit</button>
+        </form>
+
+        <a href="/posts/show/<%= post._id %>">Back</a>
+    </div>
+</div>

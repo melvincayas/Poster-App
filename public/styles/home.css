@@ -1,0 +1,12 @@
+.image {
+  background-image: url("/images/home.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+button {
+  width: 50%;
+  max-width: 300px;
+  border-radius: 20px !important;
+}
