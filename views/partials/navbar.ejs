@@ -10,13 +10,16 @@
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <% if (username) { %> 
-        <li class="nav-item active">
-          <a class="nav-link" href="/user/<%= username %> ">Profile</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="/user/<%= username %> ">Profile</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/posts">Timeline</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="/posts">Timeline</a>
         </li>
-        <% } %> 
+        <% } %>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/search">Search</a>
+        </li>
       </ul>
       <div class="navbar-nav d-flex">
         <% if (username) { %>

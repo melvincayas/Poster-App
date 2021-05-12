@@ -15,23 +15,7 @@
 
         <section>
         <h1 class="mb-4">Latest Posts</h1>
-        <% for (let post of posts ) { %>
-            <article class="mb-4 card">
-                <h5 class="card-header">
-                    <div class="d-flex justify-content-between">
-                    <a href="/user/<%= post.user.username %>"><%= post.user.username %></a>
-                    <a href="/posts/show/<%= post._id %>"><i class="fas fa-ellipsis-h"></i></a>
-                    </div>
-                </h5> 
-                <div class="card-body">
-                    <p class="card-text"><%= post.body %></p>
-                </div>
-                <div class="card-footer text-muted">
-                    <a href="/posts/show/<%= post._id %>"><%= post.comments.length %> <%= post.comments.length === 1 ? 'Comment' : 'Comments' %></a> / 
-                    <%= post.date %>
-                </div>
-            </article>
-        <% } %>
+            <%- include('../partials/postBlock') %>
         </section>
     </div>
 </div>
