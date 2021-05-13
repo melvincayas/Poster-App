@@ -20,7 +20,7 @@
                 <p class="card-text"><%= post.body %></p>
             </div>
             <div class="card-footer text-muted">
-                <%= post.date %>
+                <%= post.dateDif %>
             </div>
         </article>
 
@@ -57,7 +57,7 @@
                             <% } %>
                         </div>
                         <p class="card-text mt-2 mb-2"><%= comment.body %></p>
-                        <p class="card-text text-muted"><%= comment.date %></p>
+                        <p class="card-text text-muted"><%= comment.dateDif %></p>
                     </div>
                     <a href="/posts/show/<%= post._id %>/<%= comment._id %>">Reply to <%= comment.user.username %></a>
                     <% for (let reply of comment.replies) { %>
@@ -74,7 +74,7 @@
                                 <% } %>
                             </div>
                             <p class="card-text mt-2 mb-2"><%= reply.body %></p>
-                            <p class="card-text text-muted"><%= reply.date %></p>
+                            <p class="card-text text-muted"><%= reply.dateDif %></p>
                         </div>
                     <% } %>  
                     <hr>

@@ -8,5 +8,16 @@
             <p class="d-inline lead my-0"><strong><%= user.following.length %></strong> <a href="/user/<%= user.username %>/following">Following</a></p>
         </div>
     </div>
+    <form action="/user/<%= user.username %>" method="POST">
+        <div class="d-grid gap-2">
+            <% if (user_id !== user._id.toString()) { %> 
+                <% if (user_id && followingIds.includes(user._id)) { %> 
+                    <button class="btn btn-secondary">Following</button>
+                <% } else { %> 
+                    <button class="btn btn-primary">Follow</button>
+                <% } %> 
+            <% } %> 
+        </div>
+    </form>
 </div>
 <% } %>

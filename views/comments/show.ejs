@@ -20,7 +20,7 @@
                 <p class="card-text"><%= comment.body %></p>
             </div>
             <div class="card-footer text-muted">
-                <%= comment.date %>
+                <%= comment.dateDif %>
             </div>
         </article>
 
@@ -57,7 +57,7 @@
                                 <% } %>
                             </div>
                             <p class="card-text mt-2 mb-2"><%= reply.body %></p>
-                            <p class="card-text text-muted"><%= reply.date %></p>
+                            <p class="card-text text-muted"><%= reply.dateDif %></p>
                         </div>
                         <hr>
                     <% } %>

@@ -1,7 +1,6 @@
 <%- layout('./templates/boilerplate') -%>
 <div class="row">
     <div class="col-md-6 offset-md-3">
-        <% if (username) { %> 
         <section>
             <h1>What's happening?</h1>
             <form class="needs-validation" action="/posts" method="POST" novalidate>
@@ -11,7 +10,6 @@
             </div>
             </form>
         </section>
-        <% } %> 
 
         <section>
         <h1 class="mb-4">Latest Posts</h1>

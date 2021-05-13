@@ -9,9 +9,9 @@
     <div class="card-body">
         <p class="card-text"><%= post.body %></p>
     </div>
-    <div class="card-footer text-muted">
-        <a href="/posts/show/<%= post._id %>"><%= post.comments.length %> <%= post.comments.length === 1 ? 'Comment' : 'Comments' %></a> / 
-        <%= post.date %>
+    <div class="card-footer text-muted d-flex justify-content-between">
+        <a href="/posts/show/<%= post._id %>"><%= post.comments.length %> <%= post.comments.length === 1 ? 'Comment' : 'Comments' %></a>
+        <%= post.dateDif %>
     </div>
 </article>
 <% } %>

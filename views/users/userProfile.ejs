@@ -5,6 +5,9 @@
 
         <section>
         <h1 class="mb-4">Latest Posts</h1>
+        <% if (user.posts.length === 0) { %>
+            <p class="lead"><%= user.username %> has not posted yet!</p>
+        <% } %> 
         <% for (let post of user.posts ) { %>
             <article class="mb-4 card">
                 <h5 class="card-header">
