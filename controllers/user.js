@@ -7,7 +7,15 @@ module.exports.userHomePage = handleAsync(async (req, res, next) => {
 	const { username } = req.params; // requested user
 	const { user_id } = req.session; // user surfing
 
-	const user = await User.findOne({ username: username }).populate("posts");
+	const user = await User.findOne({ username: username })
+		.populate({
+			path: "posts",
+			populate: { path: "user" },
+		})
+		.populate({
+			path: "posts",
+			populate: { path: "comments" },
+		});
 	if (!user) {
 		return next(new ExpressError("User not found.", 404));
 	}

@@ -13,7 +13,9 @@
 
         <section>
         <h1 class="mb-4">Latest Posts</h1>
-            <%- include('../partials/postBlock') %>
+        <% for (let post of posts ) { %>
+            <%- include('../partials/postBlock', { post: post }) %>
+        <% } %>
         </section>
     </div>
 </div>

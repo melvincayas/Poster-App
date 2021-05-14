@@ -24,7 +24,9 @@ module.exports.searchForm = handleAsync(async (req, res) => {
 	} else if (type === "post") {
 		posts = await Post.find({
 			body: { $regex: query, $options: "i" },
-		}).populate("user", "username");
+		})
+			.populate("user", "username")
+			.populate("comments");
 	}
 
 	res.render("search", { users, followingIds, query, posts, user_id });
