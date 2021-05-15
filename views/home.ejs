@@ -10,20 +10,22 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row text-center">
-            <div class="col-6 image">
+        <div class="row text-center d-flex">
+            <div class="col-xs-12 col-lg-6 order-2 order-lg-1 image">
             </div>
-            <div class="col-6 my-auto">
-                <div>
-                    <h1>Poster</h1>
-                    <p class="lead">The only way to stay posted. See what your friends are up to!</p>
+            <div class="col-xs-12 col-lg-6 order-1 order-lg-2 my-auto text-box">
+                <div class="header">
+                    <h1 id="title" class="m-0">Poster</h1>
+                    <p id="subtitle" class="lead">The only way to stay <em>posted</em>.</p>
                 </div>
+                <div>
                     <% if (!username) { %> 
                     <button class="btn btn-warning mt-3 d-block mx-auto"><a href="/register">Sign Up</a></button>
-                    <button class="btn btn-warning mt-3"><a href="/login">Log In</a></button>
+                    <button class="btn btn-primary mt-3"><a href="/login">Log In</a></button>
                     <% } else { %>
-                    <button class="btn btn-warning mt-3"><a href="/posts">See Posts</a></button>
+                    <button class="btn btn-primary mt-3"><a href="/posts">See Posts</a></button>
                     <% } %> 
+                </div>
             </div>
         </div>
     </div>

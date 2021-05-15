@@ -1,12 +1,87 @@
-.image {
-  background-image: url("/images/home.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+#title {
+	font-size: 5em;
 }
 
-button {
-  width: 50%;
-  max-width: 300px;
-  border-radius: 20px !important;
+#subtitle {
+	font-size: 1.75em;
+}
+
+.header {
+	margin-bottom: 3.5em;
+}
+
+.text-box button {
+	font-size: 1.5em;
+	width: 50%;
+	max-width: 250px;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #ccc;
+	transition: 0.1s ease-in-out;
+}
+
+.text-box button:active {
+	transform: scale(0.98);
+}
+
+.image {
+	background-image: url("/images/home.jpg");
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+}
+
+.btn a {
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.btn-primary a {
+	color: #fff;
+}
+
+.btn-primary:hover a {
+	color: seashell;
+}
+
+@media all and (max-width: 575px) {
+	#title {
+		font-size: 4em;
+	}
+
+	#subtitle {
+		font-size: 1.25em;
+	}
+
+	.text-box button {
+		font-size: 1em;
+	}
+
+	.header {
+		margin-bottom: 0;
+	}
+}
+
+@media all and (max-width: 991px) {
+	.image {
+		background-size: cover;
+		background-repeat: no-repeat;
+		height: 50vh;
+	}
+
+	.text-box {
+		height: 50vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
+@media all and (min-width: 992px) {
+	#title {
+		font-size: 6em;
+	}
+
+	#subtitle {
+		font-size: 2.25em;
+	}
 }
