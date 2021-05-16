@@ -3,7 +3,20 @@
         <div class="col-lg-6 my-auto">
             <section class="mb-4">
                 <div class="card">
-                    <h1 class="card-header"><%= user.username %></h1>
+                    <div class="card-header d-flex justify-content-between">
+                        <h2 class="my-auto"><a href="/user/<%= user.username %>"><%= user.username %></a></h2>
+                        <form action="/user/<%= user.username %>" method="POST">
+                            <div class="d-grid gap-2">
+                                <% if (user_id !== user._id.toString()) { %> 
+                                <% if (user_id && isFollowing) { %> 
+                                <button class="my-auto btn btn-secondary user-card-btn">Following</button>
+                                <% } else { %> 
+                                <button class="my-auto btn btn-primary user-card-btn">Follow</button>
+                                <% } %> 
+                                <% } %> 
+                            </div>
+                        </form>
+                    </div>
                     <div class="card-body">
                         <div class="card-text text-center d-flex flex-row justify-content-evenly">
                             <p class="d-inline lead my-0"><strong><%= user.posts.length %></strong> <a href="/user/<%= user.username %>"><%= user.posts.length === 1 ? 'Post' : 'Posts' %></a></p>
@@ -11,17 +24,6 @@
                             <p class="d-inline lead my-0"><strong><%= user.following.length %></strong> <a href="/user/<%= user.username %>/following">Following</a></p>
                         </div>
                     </div>
-                    <form action="/user/<%= user.username %>" method="POST">
-                        <div class="d-grid gap-2">
-                            <% if (user_id !== user._id.toString()) { %> 
-                            <% if (user_id && isFollowing) { %> 
-                            <button class="btn btn-secondary">Following</button>
-                            <% } else { %> 
-                            <button class="btn btn-primary">Follow</button>
-                            <% } %> 
-                            <% } %> 
-                        </div>
-                    </form>
                 </div>
             </section>
         </div>

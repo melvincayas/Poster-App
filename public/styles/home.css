@@ -33,6 +33,9 @@
 .btn a {
 	text-transform: uppercase;
 	text-decoration: none;
+	display: block;
+	width: 100%;
+	max-width: 250px;
 }
 
 .btn-primary a {

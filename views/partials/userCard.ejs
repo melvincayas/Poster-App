@@ -1,5 +1,18 @@
-<div class="card mb-4">
-    <h3 class="card-header"><a href="/user/<%= user.username %>"><%= user.username %></a></h3>
+<div id="user-card" class="card mb-4">
+    <div class="card-header d-flex justify-content-between">
+        <h4 class="my-auto"><a href="/user/<%= user.username %>"><%= user.username %></a></h4>
+        <form action="/user/<%= user.username %>" method="POST">
+            <div class="d-grid gap-2">
+                <% if (user_id !== user._id.toString()) { %> 
+                    <% if (user_id && followingIds.includes(user._id)) { %> 
+                        <button class="btn btn-secondary user-card-btn">Following</button>
+                    <% } else { %> 
+                        <button class="btn btn-primary user-card-btn">Follow</button>
+                    <% } %> 
+                <% } %> 
+            </div>
+        </form>
+    </div>
     <div class="card-body">
         <div class="card-text text-center d-flex flex-row justify-content-evenly">
             <p class="d-inline lead my-0"><strong><%= user.posts.length %></strong> <a href="/user/<%= user.username %>"><%= user.posts.length === 1 ? 'Post' : 'Posts' %></a></p>
@@ -7,15 +20,4 @@
             <p class="d-inline lead my-0"><strong><%= user.following.length %></strong> <a href="/user/<%= user.username %>/following">Following</a></p>
         </div>
     </div>
-    <form action="/user/<%= user.username %>" method="POST">
-        <div class="d-grid gap-2">
-            <% if (user_id !== user._id.toString()) { %> 
-                <% if (user_id && followingIds.includes(user._id)) { %> 
-                    <button class="btn btn-secondary">Following</button>
-                <% } else { %> 
-                    <button class="btn btn-primary">Follow</button>
-                <% } %> 
-            <% } %> 
-        </div>
-    </form>
 </div>

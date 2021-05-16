@@ -7,8 +7,16 @@
 	width: 250px;
 }
 
-#postBlock:hover {
+#post-block:hover {
 	border-color: rgb(155, 154, 154);
+}
+
+#user-card:hover {
+	border-color: rgb(155, 154, 154);
+}
+
+.user-card-btn {
+	width: 96px;
 }
 
 .userHover:hover .uncover {
@@ -23,6 +31,25 @@
 
 .userForms {
 	box-shadow: 4px 4px 8px rgba(51, 51, 51, 0.295);
+}
+
+.search-filter {
+	background-color: rgb(155, 154, 154);
+	border-radius: 0;
+}
+
+.search-filter a {
+	display: block;
+	width: 100%;
+	text-transform: uppercase;
+}
+
+.search-filter:hover {
+	background-color: rgb(122, 122, 122);
+}
+
+.search-filter a:hover {
+	color: black;
 }
 
 a {
