@@ -1,21 +1,25 @@
 <%- layout('./templates/boilerplate') -%>
 <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
         <section>
             <h1>What's happening?</h1>
             <form class="needs-validation" action="/posts" method="POST" novalidate>
                 <textarea class="mt-4 form-control" name="body" placeholder="Everyone's waiting to hear from you!" required></textarea>
-            <div class="text-end">
-            <button class="mt-2 my-4 btn-sm btn-primary">Submit</button>
+            <div class="text-end d-grid gap-2 d-md-block">
+            <button class="mt-2 my-4 btn-sm btn-primary">Post It</button>
             </div>
             </form>
         </section>
 
         <section>
         <h1 class="mb-4">Latest Posts</h1>
-        <% for (let post of posts ) { %>
-            <%- include('../partials/postBlock', { post: post }) %>
-        <% } %>
+        <% if (!posts.length) { %> 
+            <p class="lead">Search for people to follow for posts!</p>
+        <% } else { %>
+            <% for (let post of posts) { %>
+                <%- include('../partials/postBlock', { post: post }) %>
+            <% } %>
+        <% } %> 
         </section>
     </div>
 </div>

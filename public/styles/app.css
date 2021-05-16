@@ -1,13 +1,36 @@
+#logout {
+	border: none;
+	background-color: transparent;
+}
+
+#search {
+	width: 250px;
+}
+
+#postBlock:hover {
+	border-color: rgb(155, 154, 154);
+}
+
 .userHover:hover .uncover {
-  opacity: 1;
-  transition: max-height 0.25 ease-in-out;
+	opacity: 1;
+	transition: max-height 0.25 ease-in-out;
 }
 
 .uncover {
-  max-height: 0;
-  opacity: 0;
+	max-height: 0;
+	opacity: 0;
 }
 
 .userForms {
-  box-shadow: 4px 4px 8px rgba(51, 51, 51, 0.295);
+	box-shadow: 4px 4px 8px rgba(51, 51, 51, 0.295);
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #0275d8;
 }

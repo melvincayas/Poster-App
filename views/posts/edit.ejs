@@ -1,6 +1,6 @@
 <%- layout('./templates/boilerplate') -%>
 <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
         <h1>Edit Post</h1>
         <form action="/posts/show/<%= post._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
             <textarea class="mt-4 form-control" name="body" required><%= post.body %></textarea>

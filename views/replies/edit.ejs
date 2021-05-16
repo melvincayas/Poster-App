@@ -1,6 +1,6 @@
 <%- layout('./templates/boilerplate') -%>
 <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
         <h1 class="mb-4">Replying to:</h1>
         <article class="mb-4 card">
             <h5 class="card-header">
@@ -12,9 +12,8 @@
                 <p class="card-text"><%= comment.body %></p>
             </div>
             <div class="card-footer text-muted">
-                <%= comment.date %>
+                <%= comment.dateDif %>
             </div>
-        </article>
         </article>
 
         <h1>Edit Reply</h1>

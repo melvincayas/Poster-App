@@ -1,54 +1,51 @@
 <%- layout('./templates/boilerplate') -%>
-<div class="container">
     <div class="row">
-        <div class="col-6 offset-3">
-            <form action="/search">
-                <input type="search" name="query" placeholder="Search">
-                <button>Search</button>
-            </form>
-        </div>
-    </div>
-    <% if (query) { %> 
-    <div class="row mt-4">
-        <div class="col-6 offset-3">
-            <div class="row">
-                <div class="col">
-                    <h3 class="text-center">Search results for '<%= query %>'</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="d-flex justify-content-evenly">
-                    <a href="/search?query=<%= query %>">Users</a>
-                    <a href="/search?query=<%= query %>&type=post">Posts</a>
+        <div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
+            <% if (query) { %> 
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="text-center">Search results for '<%= query %>'</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex justify-content-evenly">
+                            <a href="/search?query=<%= query %>">Users</a>
+                            <a href="/search?query=<%= query %>&type=post">Posts</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <% } %> 
-    <% if (users.length) { %> 
-    <div class="mt-4 row">
-        <div class="col-6 offset-3">
-            <div class="mt-3">
-                <h4>Users</h4>
-                <% for (let user of users) { %>
-                        <%- include('./partials/userCard', { user: user }) %>
-                <% } %>
-            </div>
-        </div>
-    </div>
-    <% } %>
-    <% if (posts.length) { %> 
-        <div class="mt-4 row">
-            <div class=" col-6 offset-3">
-                <div class="mt-3">
-                    <h4>Posts</h4>
-                    <% for (let post of posts) { %> 
-                        <%- include('./partials/postBlock', { post: post }) %>
-                    <% } %> 
+            <% } %>
+            <% if (!users.length && !posts.length) { %>
+                <p class="lead text-center">Nothing found! Please try again.</p>
+            <% } %>   
+            <% if (users.length) { %> 
+            <div class="mt-4 row">
+                <div class="col-12">
+                    <div class="mt-3">
+                        <h4>Users</h4>
+                        <% for (let user of users) { %>
+                                <%- include('./partials/userCard', { user: user }) %>
+                        <% } %>
+                    </div>
                 </div>
             </div>
+            <% } %>
+            <% if (posts.length) { %> 
+                <div class="mt-4 row">
+                    <div class="col-12">
+                        <div class="mt-3">
+                            <h4>Posts</h4>
+                            <% for (let post of posts) { %> 
+                                <%- include('./partials/postBlock', { post: post }) %>
+                            <% } %> 
+                        </div>
+                    </div>
+                </div>
+                <% } %>
         </div>
-        <% } %>
-</div>
+    </div>

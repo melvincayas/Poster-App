@@ -1,11 +1,13 @@
 <%- layout('./templates/boilerplate') -%>
 <div class="row">
-    <div class="col-lg-6 offset-lg-3">
+    <div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
         <h1 class="mb-4">View Post</h1>
         <article class="mb-4 card">
-            <h5 class="card-header">
-                <div class="d-flex justify-content-between">
-                <span class="my-auto"><a href="/user/<%= post.user.username %>"><%= post.user.username %></a></span>
+            <div class="card-header d-flex justify-content-between">
+                    <div>
+                        <h6 class="d-inline me-1"><a href="/user/<%= post.user.username %>"><%= post.user.username %></a></h6>
+                        <small class="d-inline text-muted"><%= post.dateDif %></small>
+                    </div>
                 <% if (post.user._id.toString() === user_id) { %>
                     <div>
                     <button class="btn btn-sm btn-warning d-inline"><a href="/posts/show/<%= post._id %>/edit"><i class="fas fa-edit"></i></a></button>
@@ -14,13 +16,9 @@
                     </form>
                     </div>
                 <% } %>
-                </div>
-            </h5> 
+            </div> 
             <div class="card-body">
                 <p class="card-text"><%= post.body %></p>
-            </div>
-            <div class="card-footer text-muted">
-                <%= post.dateDif %>
             </div>
         </article>
 
@@ -46,7 +44,11 @@
                 <% for (let comment of post.comments) { %>
                     <div class="mb-2 userHover">
                         <div class="d-flex justify-content-between">
-                        <h5 class="d-inline my-auto"><a href="/user/<%= comment.user.username %>"><%= comment.user.username %></h5></a>
+                        <div>
+                            <h6 class="d-inline my-auto me-1"><a href="/user/<%= comment.user.username %>"><%= comment.user.username %></a></h6>
+                            <small class="d-inline text-muted"><%= comment.dateDif %></small> - 
+                            <a href="/posts/show/<%= post._id %>/<%= comment._id %>">Reply</a>
+                        </div>
                         <% if (comment.user._id.toString() === user_id) { %>
                             <div class="uncover d-inline">
                                 <button class="btn btn-sm btn-warning d-inline"><a href="/posts/show/<%= post._id %>/<%= comment._id %>/edit"><i class="fas fa-edit"></i></a></button>
@@ -57,13 +59,14 @@
                             <% } %>
                         </div>
                         <p class="card-text mt-2 mb-2"><%= comment.body %></p>
-                        <p class="card-text text-muted"><%= comment.dateDif %></p>
                     </div>
-                    <a href="/posts/show/<%= post._id %>/<%= comment._id %>">Reply to <%= comment.user.username %></a>
                     <% for (let reply of comment.replies) { %>
                         <div class="ms-4 mb-3 mt-3 userHover">
                             <div class="d-flex justify-content-between">
-                            <h5 class="d-inline my-auto"><a href="/user/<%= reply.user.username %>"><%= reply.user.username %></h5></a>
+                                <div>
+                                    <h6 class="d-inline my-auto me-1"><a href="/user/<%= reply.user.username %>"><%= reply.user.username %></h6></a>
+                                    <small class="d-inline text-muted"><%= reply.dateDif %></small>
+                                </div>
                             <% if (reply.user._id.toString() === user_id) { %>
                                 <div class="uncover d-inline">
                                     <button class="btn btn-sm btn-warning d-inline"><a href="/posts/show/<%= post._id %>/<%= comment._id %>/<%= reply._id %>/edit"><i class="fas fa-edit"></i></a></button>
@@ -74,7 +77,6 @@
                                 <% } %>
                             </div>
                             <p class="card-text mt-2 mb-2"><%= reply.body %></p>
-                            <p class="card-text text-muted"><%= reply.dateDif %></p>
                         </div>
                     <% } %>  
                     <hr>

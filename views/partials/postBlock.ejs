@@ -1,22 +1,28 @@
-<article class="mb-4 card">
-    <h5 class="card-header">
-        <div class="d-flex justify-content-between">
-        <a href="/user/<%= post.user.username %>"><%= post.user.username %></a>
-        <a href="/posts/show/<%= post._id %>"><i class="fas fa-ellipsis-h"></i></a>
+<article id="postBlock" class="mb-4 card">
+    <% let replyCount = 0 %>
+    <% for (let comment of post.comments) { %>
+        <% if(comment.replies) { %>
+            <% replyCount += comment.replies.length; %>
+        <% } %>
+    <% } %>  
+    <div class="card-header d-flex justify-content-between">
+        <div>
+            <h6 class="d-inline me-1"><a href="/user/<%= post.user.username %>"><%= post.user.username %></a></h6>
+            <small class="d-inline text-muted"><%= post.dateDif %></small>
         </div>
-    </h5> 
+        <div>
+            <a href="/posts/show/<%= post._id %>"><%= post.comments.length + replyCount %>
+                <% if (post.comments.length + replyCount === 0) { %>
+                    <i class="ms-1 far fa-comment"></i>
+                <% } else if (post.comments.length + replyCount === 1) { %>
+                    <i class="ms-1 fas fa-comment"></i>
+                <% } else { %>
+                    <i class="ms-1 fas fa-comments"></i>
+                <% } %>
+            </a>
+        </div>
+    </div>
     <div class="card-body">
         <p class="card-text"><%= post.body %></p>
-    </div>
-
-    <div class="card-footer text-muted d-flex justify-content-between">
-        <% let replyCount = 0 %>
-        <% for (let comment of post.comments) { %>
-            <% if(comment.replies) { %>
-                <% replyCount += comment.replies.length; %>
-            <% } %>
-        <% } %>  
-        <a href="/posts/show/<%= post._id %>"><%= post.comments.length + replyCount %> <%= post.comments.length + replyCount === 1 ? 'Comment' : 'Comments' %></a>
-        <%= post.dateDif %>
     </div>
 </article>
