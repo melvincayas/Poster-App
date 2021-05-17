@@ -17,12 +17,12 @@ module.exports.userHomePage = handleAsync(async (req, res, next) => {
 			populate: { path: "comments" },
 		});
 
-	const hearted = user.hearted.map(heart => heart._id);
 	if (!user) {
 		return next(new ExpressError("User not found.", 404));
 	}
 
 	const userLoggedIn = await User.findById(user_id);
+	const hearted = userLoggedIn.hearted.map(heart => heart._id);
 	const isFollowing = checkIfFollowing(user, userLoggedIn, user_id);
 
 	user.posts.reverse();
@@ -51,7 +51,7 @@ module.exports.followUser = handleAsync(async (req, res) => {
 		await userToFollow.save();
 		req.flash("success", `You are now following ${username}!`);
 	}
-	res.redirect(`/user/${username}`);
+	res.redirect("back");
 });
 
 module.exports.showFollowers = handleAsync(async (req, res) => {

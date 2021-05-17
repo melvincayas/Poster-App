@@ -15,6 +15,9 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	joined: {
+		type: Date,
+	},
 	posts: [
 		{
 			type: Schema.Types.ObjectId,
