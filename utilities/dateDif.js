@@ -14,8 +14,8 @@ module.exports = date => {
 	}
 
 	if (minutes <= 59) {
-		if (minutes === 1) return `${minutes} minute ago`;
-		return `${minutes} minutes ago`;
+		if (minutes === 1) return `${minutes} min ago`;
+		return `${minutes} mins ago`;
 	}
 
 	if (hours <= 23) {

@@ -18,6 +18,10 @@ router
 	.get(validateLoggedIn, posts.index)
 	.post(validateLoggedIn, validatePost, posts.addPost);
 
+router.post("/features/heart/:id", validateLoggedIn, posts.heartPost);
+
+// router.post("/features/bookmark/:id", validateLoggedIn, posts.bookmarkPost);
+
 router
 	.route("/show/:id")
 	.get(posts.showPost)

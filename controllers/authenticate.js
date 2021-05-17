@@ -8,7 +8,12 @@ module.exports.registerForm = (req, res) => {
 
 module.exports.createUser = handleAsync(async (req, res, next) => {
 	const { username, password, email } = req.body;
-	const user = new User({ username, password, email });
+	const user = new User({
+		username,
+		password,
+		email,
+		joined: new Date().toUTCString(),
+	});
 	await user.save();
 	req.session.user_id = user._id;
 	req.flash("success", `Welcome to Poster, ${user.username}!`);

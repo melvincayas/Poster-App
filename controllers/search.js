@@ -5,13 +5,14 @@ const handleAsync = require("../utilities/handleAsync");
 module.exports.searchForm = handleAsync(async (req, res) => {
 	const { user_id } = req.session;
 	const { query, type } = req.query;
+	const user = await User.findById(user_id).populate("following");
 	let followingIds = [];
 	let users = [];
 	let posts = [];
+	let hearted = [];
 
 	if (query && query.trim() !== "" && type !== "post") {
 		if (user_id) {
-			const user = await User.findById(user_id).populate("following");
 			followingIds = user.following.map(follow => follow._id);
 		}
 
@@ -22,6 +23,7 @@ module.exports.searchForm = handleAsync(async (req, res) => {
 			],
 		});
 	} else if (type === "post") {
+		hearted = user.hearted.map(heart => heart._id);
 		posts = await Post.find({
 			body: { $regex: query, $options: "i" },
 		})
@@ -29,5 +31,5 @@ module.exports.searchForm = handleAsync(async (req, res) => {
 			.populate("comments");
 	}
 
-	res.render("search", { users, followingIds, query, posts, user_id });
+	res.render("search", { users, followingIds, query, posts, user_id, hearted });
 });

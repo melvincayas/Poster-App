@@ -5,9 +5,12 @@ const ExpressError = require("../utilities/ExpressError");
 
 module.exports.index = handleAsync(async (req, res) => {
 	const { user_id } = req.session;
-	const user = await User.findById(user_id).populate("following");
+	const user = await User.findById(user_id)
+		.populate("following")
+		.populate("hearted");
 	const following = user.following.map(follow => follow._id);
 	following.push(user_id);
+	const hearted = user.hearted.map(heart => heart._id);
 	const posts = await Post.find({ user: { $in: following } })
 		.populate("user", "username")
 		.populate({
@@ -15,7 +18,26 @@ module.exports.index = handleAsync(async (req, res) => {
 			populate: { path: "replies.user" },
 		});
 	posts.reverse();
-	res.render("posts/index", { posts });
+	res.render("posts/index", { posts, hearted });
+});
+
+module.exports.heartPost = handleAsync(async (req, res, next) => {
+	const { id } = req.params;
+	const { user_id } = req.session;
+	const post = await Post.findById(id);
+	const user = await User.findById(user_id);
+
+	if (user.hearted.includes(post._id)) {
+		await User.findByIdAndUpdate(user._id, { $pull: { hearted: post._id } });
+		await Post.findByIdAndUpdate(post._id, { $pull: { hearted: user._id } });
+	} else {
+		user.hearted.push(post);
+		post.hearted.push(user);
+		await user.save();
+		await post.save();
+	}
+
+	res.sendStatus(204);
 });
 
 module.exports.showPost = handleAsync(async (req, res, next) => {

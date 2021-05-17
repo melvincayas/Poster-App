@@ -16,6 +16,8 @@ module.exports.userHomePage = handleAsync(async (req, res, next) => {
 			path: "posts",
 			populate: { path: "comments" },
 		});
+
+	const hearted = user.hearted.map(heart => heart._id);
 	if (!user) {
 		return next(new ExpressError("User not found.", 404));
 	}
@@ -24,7 +26,7 @@ module.exports.userHomePage = handleAsync(async (req, res, next) => {
 	const isFollowing = checkIfFollowing(user, userLoggedIn, user_id);
 
 	user.posts.reverse();
-	res.render("users/userProfile", { user, user_id, isFollowing });
+	res.render("users/userProfile", { user, user_id, isFollowing, hearted });
 });
 
 module.exports.followUser = handleAsync(async (req, res) => {

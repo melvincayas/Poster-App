@@ -11,15 +11,28 @@
             <small class="d-inline text-muted"><%= post.dateDif %></small>
         </div>
         <div>
+            <div class="d-inline ms-1">
             <a href="/posts/show/<%= post._id %>"><%= post.comments.length + replyCount %>
                 <% if (post.comments.length + replyCount === 0) { %>
-                    <i class="ms-1 far fa-comment"></i>
+                    <i class="far fa-comment"></i>
                 <% } else if (post.comments.length + replyCount === 1) { %>
-                    <i class="ms-1 fas fa-comment"></i>
+                    <i class="fas fa-comment"></i>
                 <% } else { %>
-                    <i class="ms-1 fas fa-comments"></i>
+                    <i class="fas fa-comments"></i>
                 <% } %>
             </a>
+            </div>
+            <div class="d-inline ms-1">
+                <span class="heart-num"><%= post.hearted.length %></span>
+                <form class="d-inline" action="/posts/features/heart/<%= post._id %>" method="POST">
+                    <% if (hearted.includes(post._id)) { %> 
+                    <button class="ps-0 feature-btn"><i id="heart" class="fas fa-heart"></i></button>
+                    <% } else { %> 
+                    <button class="ps-0 feature-btn"><i class="far fa-heart"></i></button>  
+                    <% } %>
+            </form>
+            </div>
+            <i class="ms-1 far fa-bookmark"></i>
         </div>
     </div>
     <div class="card-body">

@@ -15,6 +15,15 @@
 	border-color: rgb(155, 154, 154);
 }
 
+#heart {
+	color: red;
+}
+
+.feature-btn {
+	border: none;
+	background-color: transparent;
+}
+
 .user-card-btn {
 	width: 96px;
 }

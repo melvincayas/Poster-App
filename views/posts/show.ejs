@@ -37,8 +37,15 @@
             </section>
             <% } %> 
 
+            <% let replyCount = 0 %>
+            <% for (let comment of post.comments) { %>
+                <% if(comment.replies) { %>
+                    <% replyCount += comment.replies.length; %>
+                <% } %>
+            <% } %>  
+
         <section class="mb-4 card">
-            <h5 class="card-header">Comments</h5> 
+            <h5 class="card-header">Comments (<%= post.comments.length + replyCount %>)</h5> 
             <div class="card-body">
                 <%= post.comments.length === 0 ? 'Be the first to comment!' : '' %>
                 <% for (let comment of post.comments) { %>
