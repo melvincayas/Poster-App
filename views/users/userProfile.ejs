@@ -9,7 +9,7 @@
             <p class="lead"><%= user.username %> has not posted yet!</p>
         <% } %> 
         <% for (let post of user.posts) { %>
-            <%- include('../partials/postBlock', { post: post, hearted: hearted }) %>
+            <%- include('../partials/postBlock', { post: post, hearted: hearted, bookmarked: bookmarked }) %>
         <% } %>
         </section>
     </div>

@@ -6,6 +6,8 @@ const checkIfFollowing = require("../utilities/checkIfFollowing");
 module.exports.userHomePage = handleAsync(async (req, res, next) => {
 	const { username } = req.params; // requested user
 	const { user_id } = req.session; // user surfing
+	let hearted = [];
+	let bookmarked = [];
 
 	const user = await User.findOne({ username: username })
 		.populate({
@@ -22,11 +24,22 @@ module.exports.userHomePage = handleAsync(async (req, res, next) => {
 	}
 
 	const userLoggedIn = await User.findById(user_id);
-	const hearted = userLoggedIn.hearted.map(heart => heart._id);
+
+	if (userLoggedIn) {
+		hearted = userLoggedIn.hearted.map(heart => heart._id);
+		bookmarked = userLoggedIn.bookmarked.map(bookmark => bookmark._id);
+	}
+
 	const isFollowing = checkIfFollowing(user, userLoggedIn, user_id);
 
 	user.posts.reverse();
-	res.render("users/userProfile", { user, user_id, isFollowing, hearted });
+	res.render("users/userProfile", {
+		user,
+		user_id,
+		isFollowing,
+		hearted,
+		bookmarked,
+	});
 });
 
 module.exports.followUser = handleAsync(async (req, res) => {

@@ -10,7 +10,22 @@
             <h6 class="d-inline me-1"><a href="/user/<%= post.user.username %>"><%= post.user.username %></a></h6>
             <small class="d-inline text-muted"><%= post.dateDif %></small>
         </div>
-        <div>
+        <a href="/posts/show/<%= post._id %>"><i class="fas fa-ellipsis-h"></i></a>
+    </div>
+    <div class="card-body">
+        <p class="card-text"><%= post.body %></p>
+        <div class="d-flex justify-content-between">
+            <div>
+                <div class="d-inline">
+                    <span class="heart-num"><%= post.hearted.length %></span>
+                    <form class="d-inline" action="/posts/features/heart/<%= post._id %>" method="POST">
+                        <% if (hearted.includes(post._id)) { %> 
+                            <button class="ps-0 feature-btn heart-btn"><i id="heart" class="fas fa-heart"></i></button>
+                        <% } else { %> 
+                            <button class="ps-0 feature-btn heart-btn"><i class="far fa-heart"></i></button>  
+                        <% } %>
+                </form>
+                </div>
             <div class="d-inline ms-1">
             <a href="/posts/show/<%= post._id %>"><%= post.comments.length + replyCount %>
                 <% if (post.comments.length + replyCount === 0) { %>
@@ -22,20 +37,16 @@
                 <% } %>
             </a>
             </div>
-            <div class="d-inline ms-1">
-                <span class="heart-num"><%= post.hearted.length %></span>
-                <form class="d-inline" action="/posts/features/heart/<%= post._id %>" method="POST">
-                    <% if (hearted.includes(post._id)) { %> 
-                    <button class="ps-0 feature-btn"><i id="heart" class="fas fa-heart"></i></button>
-                    <% } else { %> 
-                    <button class="ps-0 feature-btn"><i class="far fa-heart"></i></button>  
-                    <% } %>
-            </form>
             </div>
-            <i class="ms-1 far fa-bookmark"></i>
+            <div class="d-inline">
+                <form action="/posts/features/bookmark/<%= post._id %>" class="d-inline" method="POST">
+                    <% if (bookmarked.includes(post._id)) { %> 
+                        <button class="pe-0 feature-btn bookmark-btn"><i class="fas fa-bookmark"></i></button>
+                    <% } else { %> 
+                        <button class="pe-0 feature-btn bookmark-btn"><i class="far fa-bookmark"></i></button>
+                    <% } %> 
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="card-body">
-        <p class="card-text"><%= post.body %></p>
     </div>
 </article>

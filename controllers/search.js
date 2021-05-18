@@ -10,6 +10,7 @@ module.exports.searchForm = handleAsync(async (req, res) => {
 	let users = [];
 	let posts = [];
 	let hearted = [];
+	let bookmarked = [];
 
 	if (query && query.trim() !== "" && type !== "post") {
 		if (user_id) {
@@ -23,7 +24,10 @@ module.exports.searchForm = handleAsync(async (req, res) => {
 			],
 		});
 	} else if (type === "post") {
-		hearted = user.hearted.map(heart => heart._id);
+		if (user_id) {
+			hearted = user.hearted.map(heart => heart._id);
+			bookmarked = user.bookmarked.map(bookmark => bookmark._id);
+		}
 		posts = await Post.find({
 			body: { $regex: query, $options: "i" },
 		})
@@ -31,5 +35,13 @@ module.exports.searchForm = handleAsync(async (req, res) => {
 			.populate("comments");
 	}
 
-	res.render("search", { users, followingIds, query, posts, user_id, hearted });
+	res.render("search", {
+		users,
+		followingIds,
+		query,
+		posts,
+		user_id,
+		hearted,
+		bookmarked,
+	});
 });

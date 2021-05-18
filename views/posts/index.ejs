@@ -17,7 +17,7 @@
             <p class="lead">Search for people to follow for posts!</p>
         <% } else { %>
             <% for (let post of posts) { %>
-                <%- include('../partials/postBlock', { post: post }) %>
+                <%- include('../partials/postBlock', { post: post, hearted: hearted, bookmarked: bookmarked }) %>
             <% } %>
         <% } %> 
         </section>

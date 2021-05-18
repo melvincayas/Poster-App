@@ -11,6 +11,7 @@ module.exports.index = handleAsync(async (req, res) => {
 	const following = user.following.map(follow => follow._id);
 	following.push(user_id);
 	const hearted = user.hearted.map(heart => heart._id);
+	const bookmarked = user.bookmarked.map(bookmark => bookmark._id);
 	const posts = await Post.find({ user: { $in: following } })
 		.populate("user", "username")
 		.populate({
@@ -18,7 +19,7 @@ module.exports.index = handleAsync(async (req, res) => {
 			populate: { path: "replies.user" },
 		});
 	posts.reverse();
-	res.render("posts/index", { posts, hearted });
+	res.render("posts/index", { posts, hearted, bookmarked });
 });
 
 module.exports.heartPost = handleAsync(async (req, res, next) => {
@@ -33,6 +34,26 @@ module.exports.heartPost = handleAsync(async (req, res, next) => {
 	} else {
 		user.hearted.push(post);
 		post.hearted.push(user);
+		await user.save();
+		await post.save();
+	}
+
+	res.sendStatus(204);
+});
+
+module.exports.bookmarkPost = handleAsync(async (req, res) => {
+	const { id } = req.params;
+	const { user_id } = req.session;
+
+	const post = await Post.findById(id);
+	const user = await User.findById(user_id);
+
+	if (user.bookmarked.includes(post._id)) {
+		await User.findByIdAndUpdate(user._id, { $pull: { bookmarked: post._id } });
+		await Post.findByIdAndUpdate(post._id, { $pull: { bookmarked: user._id } });
+	} else {
+		user.bookmarked.push(post);
+		post.bookmarked.push(user);
 		await user.save();
 		await post.save();
 	}

@@ -27,6 +27,7 @@ module.exports.loginForm = handleAsync(async (req, res, next) => {
 module.exports.login = handleAsync(async (req, res, next) => {
 	const { username, password } = req.body;
 	const validUser = await User.findAndValidate(username, password);
+
 	if (validUser) {
 		req.session.user_id = validUser._id;
 		req.flash("success", `Welcome back, ${username}!`);
@@ -39,5 +40,6 @@ module.exports.login = handleAsync(async (req, res, next) => {
 
 module.exports.logout = (req, res) => {
 	req.session.user_id = null;
+	req.session.redirectTo = null;
 	res.redirect("/login");
 };

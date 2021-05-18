@@ -20,7 +20,7 @@ router
 
 router.post("/features/heart/:id", validateLoggedIn, posts.heartPost);
 
-// router.post("/features/bookmark/:id", validateLoggedIn, posts.bookmarkPost);
+router.post("/features/bookmark/:id", validateLoggedIn, posts.bookmarkPost);
 
 router
 	.route("/show/:id")
