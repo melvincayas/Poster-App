@@ -12,6 +12,11 @@ module.exports.searchForm = handleAsync(async (req, res) => {
 	let hearted = [];
 	let bookmarked = [];
 
+	if ((query && query.trim() === "") || query === "") {
+		req.flash("error", "Please enter something to search.");
+		return res.redirect("back");
+	}
+
 	if (query && query.trim() !== "" && type !== "post") {
 		if (user_id) {
 			followingIds = user.following.map(follow => follow._id);

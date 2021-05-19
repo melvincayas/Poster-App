@@ -1,22 +1,28 @@
-<nav class="sticky-top navbar navbar-expand-md navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/posts">Poster</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<nav class="sticky-top navbar navbar-expand navbar-light bg-light">
+  <div class="container-fluid d-flex justify-content-between">
+    <div class="d-flex">
+      <a class="navbar-brand" href="/">Poster</a>
+      <form action="/search" id="nav-search"class="d-flex">
+        <input id="search" class="form-control me-2" type="search" name="query" placeholder="Users or Posts" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      </div>
+      <div>
+      <ul class="navbar-nav me-auto my-auto">
         <% if (username) { %> 
         <li class="nav-item">
-          <a class="nav-link active" href="/user/<%= username %> ">Profile</a>
+            <a class="nav-link active" href="/posts"><i class="fas fa-home"></i></a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/user/<%= username %> "><i class="fas fa-user"></i></a>
+        </li>
+        <li class="nav-item" id="mobile-search-btn">
+          <a href="/search" class="nav-link active"><i class="fas fa-search"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/posts">Timeline</a>
-        </li>
-        <li>
           <form action="/logout" class="d-flex" method="POST">
             <div class="d-grid gap-2">
-            <button id="logout" class="nav-link active">Log Out</button>
+            <button id="logout" class="nav-link active"><i class="fas fa-sign-out-alt"></i></button>
             </div>
           </form>
         </li>
@@ -29,10 +35,6 @@
         </li>
         <% } %> 
       </ul>
-      <form action="/search" class="d-flex">
-        <input id="search" class="form-control me-2" type="search" name="query" placeholder="Search for users or posts" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </div>
     </div>
-  </div>
 </nav>

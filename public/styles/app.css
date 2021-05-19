@@ -3,10 +3,6 @@
 	background-color: transparent;
 }
 
-#search {
-	width: 250px;
-}
-
 #post-block:hover {
 	border-color: rgb(155, 154, 154);
 }
@@ -15,8 +11,25 @@
 	border-color: rgb(155, 154, 154);
 }
 
+#mobile-search {
+	display: none !important;
+}
+
+#mobile-search-btn {
+	display: none !important;
+}
+
 #heart {
 	color: red;
+}
+
+.navbar-brand {
+	font-size: 1.5em;
+}
+
+.nav-item {
+	font-size: 1.25em;
+	padding-left: 0.5em;
 }
 
 .feature-btn {
@@ -69,4 +82,19 @@ a {
 a:hover {
 	text-decoration: underline;
 	color: #0275d8;
+}
+
+@media all and (max-width: 575px) {
+	#nav-search {
+		display: none !important;
+	}
+
+	#mobile-search {
+		display: inline !important;
+		width: 100%;
+	}
+
+	#mobile-search-btn {
+		display: inline !important;
+	}
 }

@@ -11,8 +11,7 @@ router
 	.post(validateLoggedIn, user.followUser);
 
 router.get("/:username/followers", user.showFollowers);
-router.get("/:username/following", user.showFollowing);
 
-// router.get("/:username/following", user.showFollowing);
+router.get("/:username/following", user.showFollowing);
 
 module.exports = router;
