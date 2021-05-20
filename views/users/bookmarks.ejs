@@ -1,0 +1,17 @@
+<%- layout('./templates/boilerplate') -%>
+<div class="row mt-2">
+    <div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
+        <%- include('../partials/userBlock') %>
+
+        <section>
+        <h2 class="mb-4">Saved Posts</h2>
+        <% if (!posts.length) { %>
+            <p class="lead">You don't have any saved posts!</p>
+        <% } else { %> 
+            <% for (let post of posts) { %>
+                <%- include('../partials/postBlock', { post: post, hearted: hearted, bookmarked: bookmarked }) %>
+            <% } %>
+        <% } %>
+        </section>
+    </div>
+</div>

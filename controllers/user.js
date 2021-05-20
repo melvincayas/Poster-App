@@ -2,6 +2,7 @@ const User = require("../models/User");
 const ExpressError = require("../utilities/ExpressError");
 const handleAsync = require("../utilities/handleAsync");
 const checkIfFollowing = require("../utilities/checkIfFollowing");
+const Post = require("../models/Post");
 
 module.exports.userHomePage = handleAsync(async (req, res, next) => {
 	const { username } = req.params; // requested user
@@ -92,4 +93,26 @@ module.exports.showFollowing = handleAsync(async (req, res) => {
 	const isFollowing = checkIfFollowing(user, userLoggedIn, user_id);
 	user.following.sort();
 	res.render("users/following", { user, user_id, isFollowing });
+});
+
+module.exports.showBookmarked = handleAsync(async (req, res, next) => {
+	const { username } = req.params;
+	const { user_id } = req.session;
+
+	const user = await User.findOne({ username }).populate("bookmarked");
+
+	if (user._id != user_id) {
+		return next(
+			new ExpressError("You don't have permission to view this.", 401)
+		);
+	}
+
+	const hearted = user.hearted.map(heart => heart._id);
+	const bookmarked = user.bookmarked.map(bookmark => bookmark._id);
+	const posts = await Post.find({ _id: { $in: bookmarked } }).populate(
+		"user",
+		"username"
+	);
+
+	res.render("users/bookmarks", { user, user_id, posts, hearted, bookmarked });
 });
