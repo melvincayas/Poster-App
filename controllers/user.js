@@ -56,15 +56,14 @@ module.exports.followUser = handleAsync(async (req, res) => {
 		await User.findByIdAndUpdate(userToFollow._id, {
 			$pull: { followers: user._id },
 		});
-		req.flash("success", `You have unfollowed ${username}.`);
 	} else {
 		user.following.push(userToFollow);
 		userToFollow.followers.push(user);
 		await user.save();
 		await userToFollow.save();
-		req.flash("success", `You are now following ${username}!`);
 	}
-	res.redirect("back");
+
+	res.sendStatus(204);
 });
 
 module.exports.showFollowers = handleAsync(async (req, res) => {
