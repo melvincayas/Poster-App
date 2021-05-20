@@ -6,6 +6,14 @@ const userSchema = new Schema({
 	username: {
 		type: String,
 		required: true,
+		trim: true,
+	},
+	uniqueName: {
+		type: String,
+		required: true,
+		unique: true,
+		dropDups: true,
+		trim: true,
 	},
 	password: {
 		type: String,
@@ -14,6 +22,10 @@ const userSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
+		unique: true,
+		dropDups: true,
+		lowercase: true,
+		trim: true,
 	},
 	joined: {
 		type: Date,
@@ -46,14 +58,12 @@ const userSchema = new Schema({
 		{
 			type: Schema.Types.ObjectId,
 			ref: "User",
-			unique: true,
 		},
 	],
 	following: [
 		{
 			type: Schema.Types.ObjectId,
 			ref: "User",
-			unique: true,
 		},
 	],
 });

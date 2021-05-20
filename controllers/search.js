@@ -38,6 +38,8 @@ module.exports.searchForm = handleAsync(async (req, res) => {
 		})
 			.populate("user", "username")
 			.populate("comments");
+
+		console.log(posts);
 	}
 
 	res.render("search", {

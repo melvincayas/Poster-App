@@ -18,6 +18,7 @@ mongoose.connect("mongodb://localhost:27017/poster", {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useFindAndModify: false,
+	useCreateIndex: true,
 });
 
 app.engine("ejs", engine);

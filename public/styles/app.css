@@ -32,6 +32,10 @@
 	padding-left: 0.5em;
 }
 
+a.auth-links {
+	color: #0275d8;
+}
+
 .feature-btn {
 	border: none;
 	background-color: transparent;

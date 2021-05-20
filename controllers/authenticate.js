@@ -1,5 +1,4 @@
 const handleAsync = require("../utilities/handleAsync");
-const ExpressError = require("../utilities/ExpressError");
 const User = require("../models/User");
 
 module.exports.registerForm = (req, res) => {
@@ -9,11 +8,21 @@ module.exports.registerForm = (req, res) => {
 module.exports.createUser = handleAsync(async (req, res, next) => {
 	const { username, password, email } = req.body;
 	const user = new User({
-		username,
+		username: username,
+		uniqueName: username.toLowerCase(),
 		password,
 		email,
 		joined: new Date().toUTCString(),
 	});
+
+	if (await User.findOne({ uniqueName: user.uniqueName })) {
+		req.flash("error", "Username already exists!");
+		return res.redirect("register");
+	} else if (await User.findOne({ email: user.email })) {
+		req.flash("error", "An account exists with that email!");
+		return res.redirect("register");
+	}
+
 	await user.save();
 	req.session.user_id = user._id;
 	req.flash("success", `Welcome to Poster, ${user.username}!`);
