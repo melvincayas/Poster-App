@@ -7,6 +7,15 @@
 	border-color: rgb(155, 154, 154);
 }
 
+#notification-bell {
+	border: none;
+	background-color: transparent;
+}
+
+#notification-bell-unviewed {
+	color: goldenrod;
+}
+
 #user-card:hover {
 	border-color: rgb(155, 154, 154);
 }

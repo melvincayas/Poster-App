@@ -41,8 +41,12 @@ app.use((req, res, next) => {
 });
 app.use(async (req, res, next) => {
 	if (req.session.user_id) {
-		const { username } = await User.findOne({ _id: req.session.user_id });
+		const { username, viewedNotifications } = await User.findOne({
+			_id: req.session.user_id,
+		});
+
 		res.locals.username = username;
+		res.locals.viewedNotifications = viewedNotifications;
 	} else {
 		res.locals.username = null;
 	}

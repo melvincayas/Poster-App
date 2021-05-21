@@ -8,17 +8,15 @@
                         <% if (user_id === user._id.toString()) { %>
                             <a class="my-auto" href="/user/<%= user.username %>/bookmarks"><i class="fas fa-bookmark me-1"></i> Saved</a>
                         <% } else { %>
-                        <form action="/user/<%= user.username %>" method="POST">
-                            <div class="d-grid gap-2">
-                                <% if (user_id !== user._id.toString()) { %> 
+                            <form action="/user/<%= user.username %>" method="POST">
+                                <div class="d-grid gap-2">
                                     <% if (user_id && isFollowing) { %> 
-                                    <button class="my-auto btn btn-secondary user-card-btn">Following</button>
+                                        <button class="my-auto btn btn-secondary user-card-btn">Following</button>
                                     <% } else { %> 
                                     <button class="my-auto btn btn-primary user-card-btn">Follow</button>
                                     <% } %> 
-                                <% } %>
-                            </div>
-                        </form>
+                                </div>
+                            </form>
                         <% } %>
                     </div>
                     <div class="card-body">

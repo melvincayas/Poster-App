@@ -37,19 +37,42 @@ module.exports.addComment = handleAsync(async (req, res) => {
 	const { id } = req.params;
 	const { body } = req.body;
 	const { user_id } = req.session;
+
 	const post = await Post.findById(id).populate("user", "username");
 	const user = await User.findById(user_id);
+
 	const comment = new Comment({
 		body: body,
 		date: new Date().toUTCString(),
 		post: post,
 		user: user,
 	});
+
 	post.comments.push(comment);
 	user.comments.push(comment);
+
 	await comment.save();
 	await post.save();
 	await user.save();
+
+	if (post.user._id.toString() !== user_id) {
+		const notification = {
+			category: "comment",
+			date: comment.date,
+			content: comment.body,
+			user: user,
+			post: post,
+			comment: comment,
+		};
+
+		const postOwner = await User.findByIdAndUpdate(post.user._id, {
+			$set: { viewedNotifications: false },
+		});
+		postOwner.notifications.push(notification);
+
+		await postOwner.save();
+	}
+
 	req.flash("success", `Commented on ${post.user.username}'s post!`);
 	res.redirect(`/posts/show/${id}`);
 });

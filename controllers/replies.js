@@ -21,6 +21,7 @@ module.exports.addReply = handleAsync(async (req, res) => {
 	const { postId, commentId } = req.params;
 	const { user_id } = req.session;
 	const { body } = req.body;
+
 	const user = await User.findById(user_id);
 	const comment = await Comment.findById(commentId).populate(
 		"user",
@@ -29,6 +30,26 @@ module.exports.addReply = handleAsync(async (req, res) => {
 	const reply = { body, date: new Date().toUTCString(), user };
 	comment.replies.push(reply);
 	await comment.save();
+
+	if (comment.user._id !== user._id) {
+		const post = await Post.findById(postId);
+		const notification = {
+			category: "reply",
+			date: reply.date,
+			content: reply.body,
+			user: user,
+			post: post,
+			comment: comment,
+		};
+
+		const commentOwner = await User.findByIdAndUpdate(comment.user._id, {
+			$set: { viewedNotifications: false },
+		});
+
+		commentOwner.notifications.push(notification);
+		await commentOwner.save();
+	}
+
 	req.flash("success", `Replied to ${comment.user.username}`);
 	res.redirect(`/posts/show/${postId}`);
 });

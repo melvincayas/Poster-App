@@ -1,0 +1,19 @@
+<%- layout('./templates/boilerplate') -%>
+<section class="row mt-2">
+    <div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
+        <h1 class="mb-3">Notifications</h1>
+<% for (let notification of notifications) { %>
+    <div>
+    <% if (notification.category === 'follow') { %> 
+        <p><a href="/user/<%= notification.user.username %>"><strong><%= notification.user.username %></strong></a> <%= notification.content %>. <small class="text-muted"><%= notification.dateDif %></small></p>
+    <% } else if (notification.category === 'like') { %> 
+        <p><a href="/user/<%= notification.user.username %>"><strong><%= notification.user.username %></strong></a> <%= notification.content %> <a href="/posts/show/<%= notification.post._id %>"><strong>post</strong></a>. <small class="text-muted"><%= notification.dateDif %></small></p>
+    <% } else if (notification.category === 'comment') { %>
+        <p><a href="/user/<%= notification.user.username %>"><strong><%= notification.user.username %></strong></a> commented on your <a href="/posts/show/<%= notification.post._id %>"><strong>post</strong></a>: "<%= notification.content %>" <small class="text-muted"><%= notification.dateDif %></small></p>
+    <% } else { %> 
+        <p><a href="/user/<%= notification.user.username %>"><strong><%= notification.user.username %></strong></a> replied to your <a href="/posts/show/<%= notification.post._id %>/<%= notification.comment._id %>"><strong>comment</strong></a>: "<%= notification.content %>" <small class="text-muted"><%= notification.dateDif %></small></p>
+    <% } %> 
+    </div> 
+<% } %>
+    </div>  
+</section>

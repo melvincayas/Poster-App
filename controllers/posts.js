@@ -25,7 +25,7 @@ module.exports.index = handleAsync(async (req, res) => {
 module.exports.heartPost = handleAsync(async (req, res, next) => {
 	const { id } = req.params;
 	const { user_id } = req.session;
-	const post = await Post.findById(id);
+	const post = await Post.findById(id).populate("user");
 	const user = await User.findById(user_id);
 
 	if (user.hearted.includes(post._id)) {
@@ -36,6 +36,23 @@ module.exports.heartPost = handleAsync(async (req, res, next) => {
 		post.hearted.push(user);
 		await user.save();
 		await post.save();
+
+		if (post.user._id.toString() !== user_id) {
+			const notification = {
+				category: "like",
+				date: new Date().toUTCString(),
+				content: "liked your",
+				user: user,
+				post: post,
+			};
+
+			const poster = await User.findByIdAndUpdate(post.user._id, {
+				$set: { viewedNotifications: false },
+			});
+
+			poster.notifications.push(notification);
+			await poster.save();
+		}
 	}
 
 	res.sendStatus(204);

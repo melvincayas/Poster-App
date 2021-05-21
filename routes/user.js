@@ -16,4 +16,10 @@ router.get("/:username/following", user.showFollowing);
 
 router.get("/:username/bookmarks", validateLoggedIn, user.showBookmarked);
 
+router.get(
+	"/:username/notifications",
+	validateLoggedIn,
+	user.showNotifications
+);
+
 module.exports = router;

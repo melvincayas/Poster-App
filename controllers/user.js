@@ -3,6 +3,7 @@ const ExpressError = require("../utilities/ExpressError");
 const handleAsync = require("../utilities/handleAsync");
 const checkIfFollowing = require("../utilities/checkIfFollowing");
 const Post = require("../models/Post");
+const dateDif = require("../utilities/dateDif");
 
 module.exports.userHomePage = handleAsync(async (req, res, next) => {
 	const { username } = req.params; // requested user
@@ -60,6 +61,20 @@ module.exports.followUser = handleAsync(async (req, res) => {
 	} else {
 		user.following.push(userToFollow);
 		userToFollow.followers.push(user);
+
+		if (user._id !== userToFollow._id) {
+			const notification = {
+				category: "follow",
+				date: new Date().toUTCString(),
+				content: "has started following you",
+				user: user,
+			};
+			userToFollow.notifications.push(notification);
+			await User.findByIdAndUpdate(userToFollow._id, {
+				$set: { viewedNotifications: false },
+			});
+		}
+
 		await user.save();
 		await userToFollow.save();
 	}
@@ -101,7 +116,7 @@ module.exports.showBookmarked = handleAsync(async (req, res, next) => {
 
 	const user = await User.findOne({ username }).populate("bookmarked");
 
-	if (user._id != user_id) {
+	if (user._id.toString() !== user_id) {
 		return next(
 			new ExpressError("You don't have permission to view this.", 401)
 		);
@@ -115,4 +130,31 @@ module.exports.showBookmarked = handleAsync(async (req, res, next) => {
 	);
 
 	res.render("users/bookmarks", { user, user_id, posts, hearted, bookmarked });
+});
+
+module.exports.showNotifications = handleAsync(async (req, res, next) => {
+	const { username } = req.params;
+	const { user_id } = req.session;
+
+	const user = await User.findOneAndUpdate(
+		{ username },
+		{ $set: { viewedNotifications: true } }
+	).populate({
+		path: "notifications",
+		populate: { path: "user" },
+	});
+
+	if (user._id.toString() !== user_id) {
+		return next(
+			new ExpressError("You don't have permission to view this.", 401)
+		);
+	}
+
+	const { notifications } = user;
+	notifications.forEach(notification => {
+		notification.dateDif = dateDif(notification.date);
+	});
+	notifications.reverse();
+
+	res.render("users/notifications", { notifications });
 });

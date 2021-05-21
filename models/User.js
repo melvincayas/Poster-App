@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const { Schema } = mongoose;
+const dateDif = require("../utilities/dateDif");
 
 const userSchema = new Schema({
 	username: {
@@ -66,6 +67,38 @@ const userSchema = new Schema({
 			ref: "User",
 		},
 	],
+	notifications: [
+		{
+			category: {
+				type: String,
+				required: true,
+				enum: ["follow", "comment", "reply", "like"],
+			},
+			date: {
+				type: Date,
+			},
+			content: {
+				type: String,
+				required: true,
+			},
+			user: {
+				type: Schema.Types.ObjectId,
+				ref: "User",
+			},
+			post: {
+				type: Schema.Types.ObjectId,
+				ref: "Post",
+			},
+			comment: {
+				type: Schema.Types.ObjectId,
+				ref: "Comment",
+			},
+		},
+	],
+	viewedNotifications: {
+		type: Boolean,
+		default: true,
+	},
 });
 
 userSchema.statics.findAndValidate = async function (username, password) {

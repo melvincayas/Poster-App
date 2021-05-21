@@ -16,6 +16,15 @@
         <li class="nav-item">
           <a class="nav-link active" href="/user/<%= username %> "><i class="fas fa-user"></i></a>
         </li>
+        <li class="nav-item">
+          <a id="notification-bell" href="/user/<%= username %>/notifications" class="nav-link active">
+            <% if (viewedNotifications) { %> 
+              <i class="far fa-bell"></i>
+            <% } else { %>
+              <span id="notification-bell-unviewed"><i class="fas fa-bell"></i></span>
+            <% } %> 
+          </a>
+        </li>
         <li class="nav-item" id="mobile-search-btn">
           <a href="/search" class="nav-link active"><i class="fas fa-search"></i></a>
         </li>
