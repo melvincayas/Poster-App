@@ -1,5 +1,4 @@
 const { user, post, comment, reply } = require("./validationSchemas");
-const Joi = require("Joi");
 const Post = require("../../models/Post");
 const Comment = require("../../models/Comment");
 const ExpressError = require("../ExpressError");
