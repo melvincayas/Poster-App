@@ -3,7 +3,7 @@
 	background-color: transparent;
 }
 
-#post-block:hover {
+.post-block:hover {
 	border-color: rgb(155, 154, 154);
 }
 
