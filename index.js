@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV === "production") {
+	require("dotenv").config();
+}
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -13,8 +17,10 @@ const postRoutes = require("./routes/posts");
 const authRoutes = require("./routes/authenticate");
 const userRoutes = require("./routes/user");
 const searchRoutes = require("./routes/search");
+const MongoStore = require("connect-mongo");
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/poster";
 
-mongoose.connect("mongodb://localhost:27017/poster", {
+mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useFindAndModify: false,
@@ -23,13 +29,26 @@ mongoose.connect("mongodb://localhost:27017/poster", {
 
 app.engine("ejs", engine);
 
-app.use(
-	session({
-		secret: "notagoodsecrettbh",
-		resave: false,
-		saveUninitialized: true,
-	})
-);
+const secret = process.env.SECRET || "thisshouldbeabettersecret";
+
+const sessionConfig = {
+	name: "session",
+	secret,
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		httpOnly: true,
+		expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+		maxAge: 1000 * 60 * 60 * 24 * 7,
+	},
+	store: MongoStore.create({
+		mongoUrl: dbUrl,
+		secret,
+		touchAfter: 24 * 60 * 60,
+	}),
+};
+
+app.use(session(sessionConfig));
 app.use(flash());
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));

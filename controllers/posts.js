@@ -22,7 +22,7 @@ module.exports.index = handleAsync(async (req, res) => {
 	res.render("posts/index", { posts, hearted, bookmarked });
 });
 
-module.exports.heartPost = handleAsync(async (req, res, next) => {
+module.exports.heartPost = handleAsync(async (req, res) => {
 	const { id } = req.params;
 	const { user_id } = req.session;
 	const post = await Post.findById(id).populate("user");
