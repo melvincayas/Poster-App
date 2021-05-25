@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config();
 }
 
@@ -66,10 +66,8 @@ app.use(async (req, res, next) => {
 
 		res.locals.username = username;
 		res.locals.viewedNotifications = viewedNotifications;
-		console.log("i am in the if");
 	} else {
 		res.locals.username = null;
-		console.log("i am in the else");
 	}
 	next();
 });
