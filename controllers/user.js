@@ -78,8 +78,6 @@ module.exports.followUser = handleAsync(async (req, res) => {
 		await user.save();
 		await userToFollow.save();
 	}
-
-	res.end();
 });
 
 module.exports.showFollowers = handleAsync(async (req, res) => {
