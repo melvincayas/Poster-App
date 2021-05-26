@@ -54,6 +54,8 @@ module.exports.heartPost = handleAsync(async (req, res) => {
 			await poster.save();
 		}
 	}
+
+	res.end();
 });
 
 module.exports.bookmarkPost = handleAsync(async (req, res) => {
@@ -72,6 +74,8 @@ module.exports.bookmarkPost = handleAsync(async (req, res) => {
 		await user.save();
 		await post.save();
 	}
+
+	res.end();
 });
 
 module.exports.showPost = handleAsync(async (req, res, next) => {
