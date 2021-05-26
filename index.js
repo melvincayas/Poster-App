@@ -2,6 +2,8 @@ if (process.env.NODE_ENV === "production") {
 	require("dotenv").config();
 }
 
+console.log(process.env.NODE_ENV);
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -20,12 +22,19 @@ const searchRoutes = require("./routes/search");
 const MongoStore = require("connect-mongo");
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/poster";
 
-mongoose.connect(dbUrl, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useFindAndModify: false,
-	useCreateIndex: true,
-});
+mongoose
+	.connect(dbUrl, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false,
+		useCreateIndex: true,
+	})
+	.then(() => {
+		console.log("Mongo DB connected!");
+	})
+	.catch(err => {
+		console.log(err);
+	});
 
 app.engine("ejs", engine);
 
