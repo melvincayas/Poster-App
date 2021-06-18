@@ -29,7 +29,7 @@ In the future I'd like to build on what's here by recreating the user-interface 
 ## Acknowledgements
 
 - [Unsplash](https://getbootstrap.com/)
-- [Fontawesome](https://fontawesome.com/)
+- [Font Awesome](https://fontawesome.com/)
 
 ## Contact
 
