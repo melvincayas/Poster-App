@@ -20,9 +20,9 @@ This is a project of a social media website where users can create, like, and bo
 - Notifications for follows and likes
 - Search for specific users or posts
 
-## Future of This Project
+## Future of Poster
 
-I got what I wanted out of this project once I finished the user notifications for follows and likes. My goal was to see what I could accomplish after finishing a full-stack web developer course on Udemy. After that, I began to learn React!
+I got what I wanted out of this project once I finished the user notifications for follows and likes. My goal was to see what I could accomplish after finishing a [full-stack web developer course](https://www.udemy.com/course/the-web-developer-bootcamp/) on Udemy. After that, I began to learn [React](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)!
 
 In the future I'd like to build on what's here by recreating the user-interface with React and to implement infinite scrolling.
 
