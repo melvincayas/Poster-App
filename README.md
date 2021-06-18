@@ -35,4 +35,4 @@ In the future I'd like to build on what's here by recreating the user-interface 
 
 Melvin Cayas - [cayasmj@gmail.com](mailto:cayasmj@gmail.com?subject=[GitHub])
 
-Project Link: [https://github.com/melvincayas/math-whizard](https://github.com/melvincayas/poster)
+Project Link: [https://github.com/melvincayas/poster](https://github.com/melvincayas/poster)
