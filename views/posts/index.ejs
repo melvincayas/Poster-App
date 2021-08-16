@@ -1,25 +1,35 @@
 <%- layout('./templates/boilerplate') -%>
 <div class="row">
-    <div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
-        <section>
-            <h2>What's happening?</h2>
-            <form class="needs-validation" action="/posts" method="POST" novalidate>
-                <textarea class="mt-4 form-control" name="body" placeholder="Everyone's waiting to hear from you!" required></textarea>
-            <div class="text-end d-grid gap-2">
-            <button class="mt-2 my-4 btn-sm btn-primary">POST</button>
-            </div>
-            </form>
-        </section>
+	<div class="col-md-10 col-lg-8 col-xl-6 offset-md-1 offset-lg-2 offset-xl-3">
+		<section>
+			<% if (username) { %>
+			<h2>What's happening?</h2>
+			<form class="needs-validation" action="/posts" method="POST" novalidate>
+				<textarea
+					class="mt-4 form-control"
+					name="body"
+					placeholder="Everyone's waiting to hear from you!"
+					required
+				></textarea>
+				<div class="text-end d-grid gap-2">
+					<button class="mt-2 my-4 btn-sm btn-primary">POST</button>
+				</div>
+			</form>
+			<% } else { %>
+			<p class="lead">
+				<a class="auth-links" href="/register">Sign up</a> to join the
+				conversation!
+			</p>
+			<% } %>
+		</section>
 
-        <section id="timeline">
-        <h2 class="mb-4">Latest Posts</h2>
-        <% if (!posts.length) { %> 
-            <p class="lead">Follow more people for posts!</p>
-        <% } else { %>
-            <% for (let post of posts) { %>
-                <%- include('../partials/postBlock', { post: post, hearted: hearted, bookmarked: bookmarked }) %>
-            <% } %>
-        <% } %>
-        </section>
-    </div>
+		<section id="timeline">
+			<h2 class="mb-4">Latest Posts</h2>
+			<% if (!posts.length) { %>
+			<p class="lead">Follow more people for posts!</p>
+			<% } else { %> <% for (let post of posts) { %> <%-
+			include('../partials/postBlock', { post: post, hearted: hearted,
+			bookmarked: bookmarked }) %> <% } %> <% } %>
+		</section>
+	</div>
 </div>
