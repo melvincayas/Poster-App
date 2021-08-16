@@ -5,6 +5,20 @@ const ExpressError = require("../utilities/ExpressError");
 
 module.exports.index = handleAsync(async (req, res) => {
 	const { user_id } = req.session;
+
+	if (!user_id) {
+		const posts = await Post.find()
+			.populate("user", "username")
+			.populate({
+				path: "comments",
+				populate: { path: "replies.user" },
+			});
+		posts.reverse();
+		const hearted = [];
+		const bookmarked = [];
+		return res.render("posts/index", { posts, hearted, bookmarked });
+	}
+
 	const user = await User.findById(user_id)
 		.populate("following")
 		.populate("hearted");
