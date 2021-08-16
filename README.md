@@ -38,10 +38,10 @@ If I continue this project in the future, I would:
 
 ## Contact
 
-Melvin Cayas
-[cayasmj@gmail.com](mailto:cayasmj@gmail.com?subject=[GitHub])
+Melvin Cayas  
+[cayasmj@gmail.com](mailto:cayasmj@gmail.com?subject=[GitHub])  
 [melvincayas.com](https://melvincayas.com/)
 
-Project Link
-[Live Version](https://my-poster-app.herokuapp.com/)
+Project Link  
+[Live Version](https://my-poster-app.herokuapp.com/)  
 [GitHub](https://github.com/melvincayas/poster)
