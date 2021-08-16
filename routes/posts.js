@@ -15,7 +15,7 @@ const replies = require("../controllers/replies");
 
 router
 	.route("/")
-	.get(validateLoggedIn, posts.index)
+	.get(posts.index)
 	.post(validateLoggedIn, validatePost, posts.addPost);
 
 router.post("/features/heart/:id", validateLoggedIn, posts.heartPost);
