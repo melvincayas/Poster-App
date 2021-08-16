@@ -1,8 +1,8 @@
 const handleAsync = require("../utilities/handleAsync");
 const User = require("../models/User");
 
-module.exports.registerForm = (req, res) => {
-	res.render("register");
+module.exports.signUpForm = (req, res) => {
+	res.render("signup");
 };
 
 module.exports.createUser = handleAsync(async (req, res, next) => {

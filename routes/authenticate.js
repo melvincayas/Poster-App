@@ -4,9 +4,9 @@ const { isValidSignUp } = require("../utilities/middleware/checkValidations");
 const authenticate = require("../controllers/authenticate");
 
 router
-  .route("/register")
-  .get(authenticate.registerForm)
-  .post(isValidSignUp, authenticate.createUser);
+	.route("/signup")
+	.get(authenticate.signUpForm)
+	.post(isValidSignUp, authenticate.createUser);
 
 router.route("/login").get(authenticate.loginForm).post(authenticate.login);
 
