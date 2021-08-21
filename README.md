@@ -30,7 +30,13 @@ Feel free to play around with the code.
 git clone https://github.com/melvincayas/poster.git
 ```
 
-2. Include the following in your `.env` file:
+2. Install NPM packages
+
+```
+npm install
+```
+
+3. Include the following in your `.env` file:
 
 ```
 SECRET=RANDOM_PASSWORD_FOR_SESSION_CONFIG
